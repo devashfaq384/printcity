@@ -7,10 +7,10 @@ const menuSlice = createSlice({
     initialState: "Location",
     reducers: {
         moveTo(state, action) {
-            state = action.payload
+            return action.payload
         }
     }
 })
 
-export const { add } = menuSlice.actions
+export const { moveTo } = menuSlice.actions
 export default menuSlice.reducer
