@@ -5,7 +5,7 @@ import NextStep from '../NextStep/NextStep'
 
 const Styles = () => {
   return (
-    <div className=' w-full sm:w-auto px-5 sm:p-auto ' >
+    <div className=' mx-auto w-full sm:w-auto px-5 sm:p-auto ' >
         <div className='text-[28px] my-3 text-white text-center ' >
             Chose your favorite style!
         </div>

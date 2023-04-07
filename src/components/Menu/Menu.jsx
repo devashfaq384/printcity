@@ -6,10 +6,11 @@ import  Cart  from '../../images/shopping-cart.png'
 import  Text  from '../../images/text.png'
 import { moveTo } from '../../store/slices/menuSlice'
 
-const Menu = () => {
+const Menu = ({show}) => {
     const dispatch = useDispatch()
     const move = (name)=>{
         dispatch(moveTo(name))
+        show('block')
     }
 
     let data =[

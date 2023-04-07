@@ -1,10 +1,26 @@
 import React from 'react'
 import { ArrowRightIcon } from '@heroicons/react/24/solid' 
+import { moveTo } from '../../store/slices/menuSlice'
+import { useDispatch, useSelector } from 'react-redux'
+
 
 const NextStep = () => {
+  const initialVal = useSelector((state)=> state.menuState )
+  const dispatch = useDispatch()
+  const next = (name)=>{
+    dispatch(moveTo(name))
+  }
+
+  let data =['Location' ,'Styles' ,'Text','Size']
   return (
     <div>
-        <button className='flex justify-center text-sm h-10 mt-[10%] items-center bg-yellow-300 rounded-full w-full'>
+        <button onClick={()=>{
+          for (let i = 0; i < data.length; i++) {
+            if(data[i] === initialVal ){
+              next(data[i+1])
+            }
+          }
+        }}  className='flex justify-center text-sm h-10 mt-[10%] items-center bg-yellow-300 rounded-full w-full'>
             Next Step
             <ArrowRightIcon className='h-4 pl-3'></ArrowRightIcon>
         </button>

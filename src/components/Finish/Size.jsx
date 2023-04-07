@@ -1,9 +1,36 @@
 import { CheckIcon } from '@heroicons/react/24/solid'
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { changeSize } from '../../store/slices/Size' 
 
 const Size = () => {
+    const dispatch = useDispatch()
+    const  direction  = useSelector((state)=>state.sizeState)
+    console.log(direction)
+    const dimension = [
+        {
+            size : "Small 11 x 17 inch",
+            price : "$35",
+            height : "380px",
+            width : '250px'
+        },
+        {
+            size : "Medium 18 x 24 inch",
+            price : "$45",
+            height : '420px',
+            width : '250px'
+        },
+        {
+            size : "Large 24 x 36 inch",
+            price : "$59",
+            height : '450px',
+            width : '250px'
+        },
+    ]
+
+
   return (
-    <div className='w-full mx-3 ' > 
+    <div className=' flex flex-col mx-auto w-10/12 ' > 
         <div className='text-[30px] text-white text-center' >
             Choose your size
         </div>
@@ -11,34 +38,40 @@ const Size = () => {
 
         <div className='text-white text-[20px] my-3 pl-2 ' >Metric Units</div>
         <div className='grid grid-cols-2 w-full ' >
-            <button className=' text-green-700 hover:text-white bg-white hover:bg-green-900 rounded-full h-9 w-full ' >{`Imperial[Inch]`}</button>
-            <button className='text-green-700 hover:text-white bg-white hover:bg-green-900 rounded-full h-9 w-full ' >{`Imperial[Inch]`}</button>
+            <button className=' text-green-700 hover:text-white bg-white hover:bg-green-900 rounded-full h-9 w-full hover:underline ' >{`Imperial[Inch]`}</button>
+            <button className='text-green-700 hover:text-white bg-white hover:bg-green-900 rounded-full h-9 w-full hover:underline ' >{`
+            Metric [cm]`}</button>
         </div>
         
         <div className='text-white text-[20px] my-3 pl-2 ' >Metric Units</div>
         <div className='flex flex-col grid-cols-12 w-full ' >
-            <button className=' flex justify-between items-center px-4 text-green-700 my-2 hover:text-white bg-white hover:bg-green-900 rounded-full h-9 w-full ' >
-                <span>
-                    Small 11 x 17 inch
-                </span> 
-                <span>
-                    Price
-                </span>
-            </button>
-            <button className='flex justify-between items-center px-4 text-green-700 my-2 hover:text-white bg-white hover:bg-green-900 rounded-full h-9 w-full ' >
-                <span>
-                    Medium 18 x 24 inch
-                </span>
-                <span>Price</span>
-            </button>
-            <button className='flex justify-between items-center px-4 text-green-700 my-2 hover:text-white bg-white hover:bg-green-900 rounded-full h-9 w-full' > 
-                <span>
-                    Large 24 x 36 inch
-                </span>
-                <span>
-                    Price
-                </span>
-            </button>
+            {
+                dimension.map((item)=>{
+                    return(
+                        <button onClick={()=>{ dispatch(changeSize(
+                                direction.direction === true ? 
+                                {
+                                    height :  item.height ,
+                                    width :  item.width ,
+                                    direction : direction.direction
+                                } : 
+                                {
+                                    height :  item.width,
+                                    width :  item.height,
+                                    direction : direction.direction
+                                }
+                            
+                        ))}} className=' flex justify-between items-center px-4 text-green-700 my-2 hover:text-white bg-white hover:bg-green-900 rounded-full h-9 w-full ' >
+                            <span className='hover:underline' >
+                                {item.size}
+                            </span> 
+                            <span>
+                                {item.price}
+                            </span>
+                        </button>
+                    )
+                })
+            }
 
             <button className='flex justify-center text-sm h-10 mt-[10%] items-center bg-yellow-300 rounded-full w-full'>
                 <CheckIcon className='h-5 font-bold pl-3'></CheckIcon>

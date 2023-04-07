@@ -5,7 +5,7 @@ import NextStep from '../NextStep/NextStep'
 
 const Location = () => {
   return (
-    <div className='flex flex-col mx-auto' >
+    <div className='flex flex-col w-full sm:w-auto mx-auto px-5' >
       <div className='text-[30px] text-white text-center mx-auto w-10/12 leading-10 my-2' >
         Find your favorite place
       </div>

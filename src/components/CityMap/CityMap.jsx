@@ -1,29 +1,20 @@
-
-
 import React, { useState, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
+import { changeSize } from "../../store/slices/Size";
+import MapText from "./MapText";
+import MapBoxApi from "./MapBoxApi";
 
 function CityMap() {
-  const [map, setMap] = useState(null);
-  const mapContainerRef = useRef(null);
+  const dimension = useSelector((state)=>state.sizeState)
 
-  useEffect(() => {
-    // Load the Google Maps API
-    const script = document.createElement("script");
-    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBGTuZbTDcH59nUfaYObGLxURldaJalDhs&callback=initMap`;
-    script.async = true;
-    document.head.appendChild(script);
-
-    // Initialize the map
-    window.initMap = () => {
-      const map = new window.google.maps.Map(mapContainerRef.current, {
-        center: { lat: 31.335024, lng: 73.432862 },
-        zoom: 10,
-    });
-    setMap(map)
-    };
-  }, []);
-
-  return <div ref={mapContainerRef} style={{ height: "400px" , width: "250px" }}></div>
+  return(
+    <div className="relative" >
+      <div style={{ height: dimension.height , width: dimension.width ,transition: "height 0.5s ease-out, width 0.5s ease-out" }}>
+        <MapBoxApi></MapBoxApi>
+      </div>
+      <MapText></MapText>
+    </div>
+  )
 }
 
 export default CityMap
