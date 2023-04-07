@@ -15,9 +15,9 @@ const menuSlice = createSlice({
             const { height, width, direction } = action.payload;
 
             if (direction === true) {
-                return { ...state ,  height, width, direction };
+                return { height, width, direction };
               } else {
-                return { ...state , height, width, direction };
+                return {  height, width, direction };
               }
         }
     }
