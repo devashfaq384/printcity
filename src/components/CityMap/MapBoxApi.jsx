@@ -224,6 +224,8 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYXNoZmFxMzg0IiwiYSI6ImNsZnc3bjV5czAzdHkzdHRhY
 
 const MapBoxApi = () => {
   const dimension = useSelector((state) => state.sizeState)
+  const styles = useSelector((state)=> state.styleState )
+  console.log(styles , 'here is the' )
   const mapContainerRef = useRef(null);
   const [lng, setLng] = useState(-122.431297);
   const [lat, setLat] = useState(37.773972);
@@ -249,7 +251,7 @@ const MapBoxApi = () => {
   useLayoutEffect(() => {
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
-      style: 'mapbox://styles/mapbox/streets-v11',
+      style: styles.style,
       center: [lng, lat],
       zoom,
     });
@@ -270,7 +272,7 @@ const MapBoxApi = () => {
       map.remove();
       clearTimeout(resizeTimeout);
     };
-  }, [dimension.height, dimension.width, lng, lat, zoom]);
+  }, [dimension.height, dimension.width, lng, lat, zoom , styles.style ]);
   
 
 

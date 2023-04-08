@@ -2,15 +2,34 @@ import React from 'react'
 import Red from '../../images/red.png'
 import { CheckIcon } from '@heroicons/react/24/solid'
 import NextStep from '../NextStep/NextStep'
+import { StylesList } from './StylesList'
+import { useDispatch } from 'react-redux'
+import { changeStyle } from '../../store/slices/styleSlice'
 
 const Styles = () => {
+    const dispatch = useDispatch()
   return (
-    <div className=' mx-auto w-full sm:w-auto px-5 sm:p-auto ' >
+    <div className=' mx-auto sm:w-auto px-5 sm:p-auto ' >
         <div className='text-[28px] my-3 text-white text-center ' >
             Chose your favorite style!
         </div>
-    <div className='flex flex-row justify-between sm:grid-cols-4 gap-3' >
-        <div className="relative  w-16 h-16 rounded-2xl overflow-hidden">
+    <div className='flex flex-wrap cursor-pointer justify-between sm:grid-cols-4 gap-3' >
+        { StylesList.map((item)=>{
+            return(
+                <div onClick={()=>{ 
+                    console.log('clikc is working')
+                    dispatch( changeStyle(item) )
+                }} className="relative w-16 h-16 rounded-2xl overflow-hidden">
+                        <img src={item.image} alt="Red" className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 flex items-center justify-center bg-gray-800 opacity-0 hover:opacity-50 transition-opacity duration-500">
+                        <div className="text-white">
+                            <CheckIcon className="h-10 w-10 font-bold" />
+                        </div>
+                    </div>
+                </div>
+            )
+        }) }
+        {/* <div className="relative w-16 h-16 rounded-2xl overflow-hidden">
                 <img src={Red} alt="Red" className="w-full h-full object-cover" />
             <div className="absolute inset-0 flex items-center justify-center bg-gray-800 opacity-0 hover:opacity-50 transition-opacity duration-500">
                 <div className="text-white">
@@ -33,15 +52,7 @@ const Styles = () => {
                     <CheckIcon className="h-10 w-10 font-bold" />
                 </div>
             </div>
-        </div>
-        <div className="relative w-16 h-16 rounded-2xl overflow-hidden">
-                <img src={Red} alt="Red" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 flex items-center justify-center bg-gray-800 opacity-0 hover:opacity-50 transition-opacity duration-500">
-                <div className="text-white">
-                    <CheckIcon className="h-10 w-10 font-bold" />
-                </div>
-            </div>
-        </div>
+        </div> */}
     </div>
 
         <div className='my-3 flex'>
