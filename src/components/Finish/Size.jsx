@@ -11,19 +11,19 @@ const Size = () => {
         {
             size : "Small 11 x 17 inch",
             price : "$35",
-            height : "380px",
+            height : "360px",
             width : '250px'
         },
         {
             size : "Medium 18 x 24 inch",
             price : "$45",
-            height : '420px',
+            height : '400px',
             width : '250px'
         },
         {
             size : "Large 24 x 36 inch",
             price : "$59",
-            height : '450px',
+            height : '440px',
             width : '250px'
         },
     ]
@@ -48,7 +48,8 @@ const Size = () => {
             {
                 dimension.map((item)=>{
                     return(
-                        <button onClick={()=>{ dispatch(changeSize(
+                        <button onClick={()=>{
+                             dispatch(changeSize(
                                 direction.direction === true ? 
                                 {
                                     height :  item.height ,
@@ -61,7 +62,8 @@ const Size = () => {
                                     direction : direction.direction
                                 }
                             
-                        ))}} className=' flex justify-between items-center px-4 text-green-700 my-2 hover:text-white bg-white hover:bg-green-900 rounded-full h-9 w-full ' >
+                            ))
+                        }} className=' flex justify-between items-center px-4 text-green-700 my-2 hover:text-white bg-white hover:bg-green-900 rounded-full h-9 w-full ' >
                             <span className='hover:underline' >
                                 {item.size}
                             </span> 
