@@ -279,24 +279,90 @@
 
 // export default MapBoxApi;
 
+// import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+// import { useSelector } from 'react-redux';
+// import mapboxgl from 'mapbox-gl';
+// import { rewire } from 'rewire';
+// import MapboxWorker from 'worker-loader';
+
+// mapboxgl.accessToken = 'pk.eyJ1IjoiYXNoZmFxMzg0IiwiYSI6ImNsZnc3bjV5czAzdHkzdHRhYjI0OG10dzkifQ.wuNcKy4xCuGNn8QCSyrJBg';
+
+// // Use `rewire` to modify the Webpack configuration and add a new rule to transpile the Mapbox Web Worker bundle
+// const rewireWebpack = rewire('react-scripts/scripts/build.js');
+// rewireWebpack.__set__('config', function (webpackConfig) {
+//   // Add a new rule to transpile the Mapbox Web Worker bundle separately from the rest of your code
+//   webpackConfig.module.rules.push({
+//     test: /\.worker\.js$/,
+//     use: { loader: 'worker-loader' }
+//   });
+//   return webpackConfig;
+// });
+
+// const MapBoxApi = () => {
+//   const dimension = useSelector((state) => state.sizeState);
+//   const styles = useSelector((state)=> state.styleState );
+
+//   const mapContainerRef = useRef(null);
+//   const [lng, setLng] = useState(-122.431297);
+//   const [lat, setLat] = useState(37.773972);
+//   const [zoom, setZoom] = useState(12);
+
+//   useEffect(() => {
+//     if (!mapContainerRef.current) {
+//       return;
+//     }
+
+//     // Set the Mapbox worker class to the MapboxWorker instance
+//     mapboxgl.workerClass = MapboxWorker;
+
+//     const map = new mapboxgl.Map({
+//       container: mapContainerRef.current,
+//       style: styles.style,
+//       center: [lng, lat],
+//       zoom,
+//     });
+
+//     // Wait for the map container to resize before calling map.resize()
+//     const resizeTimeout = setTimeout(() => {
+//       map.resize();
+//     }, 500);
+
+//     map.on('move', () => {
+//       const { lng, lat } = map.getCenter();
+//       setLng(lng.toFixed(4));
+//       setLat(lat.toFixed(4));
+//       setZoom(map.getZoom().toFixed(2));
+//     });
+
+//     return () => {
+//       map.remove();
+//       clearTimeout(resizeTimeout);
+//     };
+//   }, [dimension, styles]);
+
+//   useLayoutEffect(() => {
+//       mapContainerRef.current.style.height = dimension.height;
+//       mapContainerRef.current.style.width = dimension.width;
+//   }, [dimension]);
+
+//   return (
+//     <div style={{ height: dimension.height , width: dimension.width ,transition: "height 0.5s ease-out, width 0.5s ease-out"  }} >
+//       <div
+//         className='w-full h-full'
+//         ref={mapContainerRef}
+//         style={{ transition: "height 0.5s ease-out, width 0.5s ease-out" }}
+//       />    
+//     </div>
+//   );
+// };
+
+// export default MapBoxApi;
+
 import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
 import mapboxgl from 'mapbox-gl';
-import { rewire } from 'rewire';
-import MapboxWorker from 'worker-loader';
+import { useSelector } from 'react-redux';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXNoZmFxMzg0IiwiYSI6ImNsZnc3bjV5czAzdHkzdHRhYjI0OG10dzkifQ.wuNcKy4xCuGNn8QCSyrJBg';
-
-// Use `rewire` to modify the Webpack configuration and add a new rule to transpile the Mapbox Web Worker bundle
-const rewireWebpack = rewire('react-scripts/scripts/build.js');
-rewireWebpack.__set__('config', function (webpackConfig) {
-  // Add a new rule to transpile the Mapbox Web Worker bundle separately from the rest of your code
-  webpackConfig.module.rules.push({
-    test: /\.worker\.js$/,
-    use: { loader: 'worker-loader' }
-  });
-  return webpackConfig;
-});
 
 const MapBoxApi = () => {
   const dimension = useSelector((state) => state.sizeState);
@@ -311,9 +377,6 @@ const MapBoxApi = () => {
     if (!mapContainerRef.current) {
       return;
     }
-
-    // Set the Mapbox worker class to the MapboxWorker instance
-    mapboxgl.workerClass = MapboxWorker;
 
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
