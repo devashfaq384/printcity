@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export const geocoderSlice = createSlice({
   name: 'geocoder',
-  initialState: 'New York',
+  initialState: '',
   reducers: {
     setGeocoderInput: (state, action) => {
       state = action.payload

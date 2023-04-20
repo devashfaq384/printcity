@@ -4,6 +4,7 @@ import LocationFav from './LocationFav'
 import NextStep from '../NextStep/NextStep'
 import { useDispatch, useSelector } from 'react-redux'
 import { setGeocoderInput  } from '../../store/slices/searchSlice'
+import { changeTitle } from '../../store/slices/Text'
 
 const Location = () => {
   const dispatch = useDispatch()
@@ -13,8 +14,12 @@ const Location = () => {
   const handleSearch = (event) => {
     event.preventDefault();
     const geocoderInput = value.current.value
+    console.log(typeof(geocoderInput) , 'value')
     dispatch(setGeocoderInput(geocoderInput));
-    console.log(geocoderInputValue)
+    dispatch(changeTitle({
+      title: geocoderInput
+    }))
+    // console.log(geocoderInputValue)
 
   };
   

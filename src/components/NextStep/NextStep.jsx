@@ -11,7 +11,7 @@ const NextStep = () => {
     dispatch(moveTo(name))
   }
 
-  let data =['Location' ,'Styles' ,'Text','Size']
+  let data =['Location' ,'Styles' ,'Text','Shapes','Material','Size']
   return (
     <div className='text-white' >
         <button onClick={()=>{

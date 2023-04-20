@@ -1,3 +1,4 @@
+
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { useSelector } from 'react-redux';
@@ -82,9 +83,9 @@ const MapBoxApi = () => {
   useEffect(() => {
     handleSearch()
   }, [searchQuery])
-
+  console.log(dimension.class)
   return (
-    <div  style={{ height: dimension.height , width: dimension.width ,transition: "height 0.5s ease-out, width 0.5s ease-out"  }}>
+    <div className={ dimension.height && dimension.width === '300px' ? dimension.class : ' '} style={{ overflow: "hidden" ,height: dimension.height , width: dimension.width ,transition: "height 0.5s ease-out, width 0.5s ease-out"  }}>
         <div ref={mapContainerRef} className="map-container" />
     </div>
     );

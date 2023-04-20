@@ -1,5 +1,5 @@
 import { CheckIcon } from '@heroicons/react/24/solid'
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeSize } from '../../store/slices/Size' 
 
@@ -9,24 +9,26 @@ const Size = () => {
     console.log(direction)
     const dimension = [
         {
-            size : "Small 11 x 17 inch",
+            size : "Small 11 x 17",
             price : "$35",
             height : "360px",
             width : '250px'
         },
         {
-            size : "Medium 18 x 24 inch",
+            size : "Medium 18 x 24",
             price : "$45",
             height : '400px',
             width : '250px'
         },
         {
-            size : "Large 24 x 36 inch",
+            size : "Large 24 x 36",
             price : "$59",
             height : '440px',
             width : '250px'
         },
     ]
+
+    const [unit, setUnit] = useState('inch')
 
 
   return (
@@ -38,8 +40,8 @@ const Size = () => {
 
         <div className='text-white text-[20px] my-3 pl-2 ' >Metric Units</div>
         <div className='grid grid-cols-2 w-full ' >
-            <button className=' text-green-700 hover:text-white bg-white hover:bg-green-900 rounded-full h-9 w-full hover:underline ' >{`Imperial[Inch]`}</button>
-            <button className='text-green-700 hover:text-white bg-white hover:bg-green-900 rounded-full h-9 w-full hover:underline ' >{`
+            <button onClick={()=>{ setUnit('inch') }} className=' text-green-700 hover:text-white bg-white hover:bg-red-600 rounded-full h-9 w-full hover:underline ' >{`Imperial[Inch]`}</button>
+            <button onClick={()=>{setUnit('cm')}}  className='text-green-700 hover:text-white bg-white hover:bg-red-600 rounded-full h-9 w-full hover:underline ' >{`
             Metric [cm]`}</button>
         </div>
         
@@ -63,9 +65,9 @@ const Size = () => {
                                 }
                             
                             ))
-                        }} className=' flex justify-between items-center px-4 text-green-700 my-2 hover:text-white bg-white hover:bg-green-900 rounded-full h-9 w-full ' >
+                        }} className=' flex justify-between items-center px-4 text-green-700 my-2 hover:text-white bg-white hover:bg-red-600 rounded-full h-9 w-full ' >
                             <span className='hover:underline' >
-                                {item.size}
+                                {item.size} {unit}
                             </span> 
                             <span>
                                 {item.price}
