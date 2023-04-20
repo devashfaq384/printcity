@@ -13,14 +13,14 @@ const NextStep = () => {
 
   let data =['Location' ,'Styles' ,'Text','Size']
   return (
-    <div>
+    <div className='text-white' >
         <button onClick={()=>{
           for (let i = 0; i < data.length; i++) {
             if(data[i] === initialVal ){
               next(data[i+1])
             }
           }
-        }}  className='flex justify-center text-sm h-10 mt-[10%] items-center bg-yellow-300 rounded-full w-full'>
+        }}  className='flex justify-center text-sm h-10 mt-[10%] items-center bg-[rgb(59,99,110)]  rounded-full w-full'>
             Next Step
             <ArrowRightIcon className='h-4 pl-3'></ArrowRightIcon>
         </button>
